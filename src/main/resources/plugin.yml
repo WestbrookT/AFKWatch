@@ -1,0 +1,9 @@
+name: AFKWatch
+version: 1.0.0-SNAPSHOT
+description: Detects whether a player is using a hacked client to bypass typical auto-AFK methods.
+authors: [zombachu, swiftsIayer]
+main: com.zombachu.afkwatch.AFKWatch
+
+commands:
+
+permissions:
