@@ -9,11 +9,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PlayerListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
-    public void onPlayerMove(PlayerMoveEvent event) {
-
-    }
-
-    @EventHandler(ignoreCancelled = true)
     public void onPlayerJoin(PlayerJoinEvent event) {
 
     }
