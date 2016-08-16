@@ -1,5 +1,6 @@
 package com.zombachu.afkwatch;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -7,11 +8,15 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerListener implements Listener {
 
-    DataManager dm = DataManager.getInstance();
+    private DataManager dm = DataManager.getInstance();
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerJoin(PlayerJoinEvent event) {
-        PlayerData data = new PlayerData(event.getPlayer().getUniqueId());
+        Player player = event.getPlayer();
+
+        PlayerData data = new PlayerData(player.getUniqueId());
+
+        data.setLastLocation(player.getLocation());
         dm.cachePlayerData(data);
     }
 

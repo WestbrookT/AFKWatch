@@ -8,6 +8,7 @@ public class PlayerDataPoint {
     private float deltaPitch;
     private float deltaYaw;
 
+
     public PlayerDataPoint(double deltaX, double deltaY, double deltaZ, float deltaPitch, float deltaYaw) {
         this.deltaX = deltaX;
         this.deltaY = deltaY;
@@ -55,4 +56,6 @@ public class PlayerDataPoint {
     public void setDeltaYaw(float deltaYaw) {
         this.deltaYaw = deltaYaw;
     }
+
+
 }
