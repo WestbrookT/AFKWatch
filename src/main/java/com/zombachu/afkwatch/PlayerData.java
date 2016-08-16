@@ -2,6 +2,7 @@ package com.zombachu.afkwatch;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.junit.experimental.theories.DataPoint;
 
 import java.io.File;
 import java.util.UUID;
@@ -10,7 +11,7 @@ public class PlayerData {
 
     private UUID pID;
     private Location lastLocation;
-    private int lastIndex;
+    private int index;
 
     public PlayerData(UUID pID) {
         this.pID = pID;
@@ -28,15 +29,28 @@ public class PlayerData {
         this.lastLocation = lastLocation;
     }
 
-    public int getLastIndex() {
-        return lastIndex;
+    public int getIndex() {
+        return index;
     }
 
-    public void setLastIndex(int lastIndex) {
-        this.lastIndex = lastIndex;
+    public void setIndex(int lastIndex) {
+        this.index = lastIndex;
     }
 
-    public void save(PlayerDataPoint dataPoint) {
+    public static PlayerDataPoint createDataPoint(Location old, Location recent) {
+        double deltaX = old.getX() - recent.getX();
+        double deltaY = old.getY() - recent.getY();
+        double deltaZ = old.getZ() - recent.getZ();
+
+        float deltaPi = old.getPitch() - recent.getPitch();
+        float deltaYa = old.getYaw() - recent.getYaw();
+
+        PlayerDataPoint dataPoint = new PlayerDataPoint(deltaX, deltaY, deltaZ, deltaPi, deltaYa);
+
+        return dataPoint;
+    }
+
+    public void save(Location location) {
         YamlConfiguration config;
 
         File file = new File(AFKWatch.getPlugin().getDataFolder().getPath() + File.pathSeparator + pID + ".yml");
@@ -48,7 +62,11 @@ public class PlayerData {
             e.printStackTrace();
         }
 
-        config.createSection("" + dataPoint.getIndex(), dataPoint.serialize());
+        index++;
+
+        PlayerDataPoint dataPoint = createDataPoint(lastLocation, location);
+
+        config.createSection("" + index, dataPoint.serialize());
 
         try {
             config.save(file);
