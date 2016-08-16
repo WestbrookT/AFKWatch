@@ -13,4 +13,8 @@ public class AFKWatch extends JavaPlugin {
     public void onDisable() {
 
     }
+
+    public static AFKWatch getPlugin() {
+        return AFKWatch.getPlugin(AFKWatch.class);
+    }
 }

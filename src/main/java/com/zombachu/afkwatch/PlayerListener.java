@@ -13,10 +13,9 @@ public class PlayerListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-
         PlayerData data = new PlayerData(player.getUniqueId());
-
         data.setLastLocation(player.getLocation());
+
         dm.cachePlayerData(data);
     }
 
