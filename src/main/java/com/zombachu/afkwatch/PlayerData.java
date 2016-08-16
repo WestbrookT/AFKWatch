@@ -2,7 +2,6 @@ package com.zombachu.afkwatch;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.junit.experimental.theories.DataPoint;
 
 import java.io.File;
 import java.util.UUID;
@@ -37,17 +36,14 @@ public class PlayerData {
         this.index = lastIndex;
     }
 
-    public static PlayerDataPoint createDataPoint(Location old, Location recent) {
-        double deltaX = old.getX() - recent.getX();
-        double deltaY = old.getY() - recent.getY();
-        double deltaZ = old.getZ() - recent.getZ();
+    public static PlayerDataPoint createDataPoint(Location loc1, Location loc2) {
+        double deltaX = loc1.getX() - loc2.getX();
+        double deltaY = loc1.getY() - loc2.getY();
+        double deltaZ = loc1.getZ() - loc2.getZ();
+        float deltaPitch = loc1.getPitch() - loc2.getPitch();
+        float deltaYaw = loc1.getYaw() - loc2.getYaw();
 
-        float deltaPi = old.getPitch() - recent.getPitch();
-        float deltaYa = old.getYaw() - recent.getYaw();
-
-        PlayerDataPoint dataPoint = new PlayerDataPoint(deltaX, deltaY, deltaZ, deltaPi, deltaYa);
-
-        return dataPoint;
+        return new PlayerDataPoint(deltaX, deltaY, deltaZ, deltaPitch, deltaYaw);
     }
 
     public void save(Location location) {
@@ -63,9 +59,7 @@ public class PlayerData {
         }
 
         index++;
-
         PlayerDataPoint dataPoint = createDataPoint(lastLocation, location);
-
         config.createSection("" + index, dataPoint.serialize());
 
         try {

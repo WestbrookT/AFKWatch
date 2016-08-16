@@ -9,13 +9,8 @@ public class Poller implements Runnable {
 
     @Override
     public void run() {
-
-        for (Player p: Bukkit.getOnlinePlayers())
-        {
+        for (Player p: Bukkit.getOnlinePlayers()) {
             dm.getCachedPlayerData(p.getUniqueId()).save(p.getLocation());
         }
-
-
-
     }
 }
