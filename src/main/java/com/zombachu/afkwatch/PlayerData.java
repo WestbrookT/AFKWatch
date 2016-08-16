@@ -49,7 +49,8 @@ public class PlayerData {
     public void save(Location location) {
         YamlConfiguration config;
 
-        File file = new File(AFKWatch.getPlugin().getDataFolder().getPath() + File.pathSeparator + pID + ".yml");
+        File dataFolder = AFKWatch.getPlugin().getDataFolder();
+        File file = new File(dataFolder, pID + ".yml");
         try {
             config = YamlConfiguration.loadConfiguration(file);
         }
@@ -58,7 +59,6 @@ public class PlayerData {
             e.printStackTrace();
         }
 
-        index++;
         PlayerDataPoint dataPoint = createDataPoint(lastLocation, location);
         config.createSection("" + index, dataPoint.serialize());
 
@@ -68,5 +68,8 @@ public class PlayerData {
         catch (Exception e) {
             e.printStackTrace();
         }
+
+        lastLocation = location;
+        index++;
     }
 }

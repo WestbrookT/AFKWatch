@@ -7,6 +7,7 @@ public class AFKWatch extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getScheduler().runTaskTimer(this, new Poller(), 0, 40);
     }
 
