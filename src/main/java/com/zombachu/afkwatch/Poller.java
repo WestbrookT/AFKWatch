@@ -11,7 +11,7 @@ public class Poller implements Runnable {
     public void run() {
         for (Player p: Bukkit.getOnlinePlayers()) {
             PlayerData data = dm.getCachedPlayerData(p.getUniqueId());
-            data.save(p.getLocation());
+            data.createDataPoint(p.getLocation());
         }
     }
 }

@@ -6,6 +6,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.UUID;
+
 public class PlayerListener implements Listener {
 
     private DataManager dm = DataManager.getInstance();
@@ -21,7 +23,9 @@ public class PlayerListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerQuit(PlayerQuitEvent event) {
-        dm.uncachePlayerData(event.getPlayer().getUniqueId());
+        UUID pID = event.getPlayer().getUniqueId();
+        dm.getCachedPlayerData(pID).save();
+        dm.uncachePlayerData(pID);
     }
 
 }
