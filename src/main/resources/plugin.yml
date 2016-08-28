@@ -1,7 +1,7 @@
-name: AFKWatch
+name: MysteryPlugin
 version: 1.0.0-SNAPSHOT
-description: Detects whether a player is using a hacked client to bypass typical auto-AFK methods.
-authors: [zombachu, swiftsIayer]
+description: Mystery Plugin is mysterious
+authors: ["???", "???"]
 main: com.zombachu.afkwatch.AFKWatch
 
 commands:
