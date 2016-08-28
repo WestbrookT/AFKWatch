@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -19,6 +20,7 @@ public class PlayerData {
 
     public PlayerData(UUID pID) {
         this.pID = pID;
+        this.dataPoints = new ArrayList<>();
     }
 
     public UUID getID() {
